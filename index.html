@@ -48,15 +48,34 @@
     </div>
 
     <script>
-    var PLAYER_ONE_SYMBOL = 'X'
-    var PLAYER_TWO_SYMBOL = 'O'
-    var currentTurn = PLAYER_ONE_SYMBOL
+        var PLAYER_ONE_SYMBOL = 'X'
+        var PLAYER_TWO_SYMBOL = 'O'
+        var currentTurn = PLAYER_ONE_SYMBOL
 
-    var board = document.querySelector('.board')
-    board.addEventListener('click', function(e){
-        e.target.innerHTML = currentTurn
-        currentTurn = currentTurn === PLAYER_ONE_SYMBOL ? PLAYER_TWO_SYMBOL: PLAYER_ONE_SYMBOL
-    })
+        var board = document.querySelector('.board')
+        board.addEventListener('click', function (e) {
+            e.target.innerHTML = currentTurn
+            currentTurn = currentTurn === PLAYER_ONE_SYMBOL ? PLAYER_TWO_SYMBOL : PLAYER_ONE_SYMBOL
+            checkForWinner()
+        })
+
+        function checkForWinner() {
+            // var squares = Array.prototype.slice.call(document.querySelectorAll('.square'),0)
+            // var symbols = squares.map(function(square){
+            //     return sqare.innerHTML
+            // })
+            var squares = document.getElementsByClassName('square')
+            var squaresArray =[]
+
+            for (var i = 0; i < squares.length; i++) {
+                if (squares[i].innerHTML === "") {
+                    squaresArray.push('empty')
+                } else {
+                    squaresArray.push(squares[i].innerHTML)
+                }
+            }
+            console.log(squaresArray)
+        }
     </script>
 </body>
 
