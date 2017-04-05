@@ -56,7 +56,10 @@
         board.addEventListener('click', function (e) {
             e.target.innerHTML = currentTurn
             currentTurn = currentTurn === PLAYER_ONE_SYMBOL ? PLAYER_TWO_SYMBOL : PLAYER_ONE_SYMBOL
-            checkForWinner()
+            if (checkForWinner()){
+                alert("Someobody won")
+            }
+            // checkForWinner()
         })
 
         function checkForWinner() {
@@ -65,16 +68,26 @@
             //     return sqare.innerHTML
             // })
             var squares = document.getElementsByClassName('square')
-            var squaresArray =[]
+            var symbols = []
 
             for (var i = 0; i < squares.length; i++) {
                 if (squares[i].innerHTML === "") {
-                    squaresArray.push('empty')
+                    symbols.push('empty' + i)
                 } else {
-                    squaresArray.push(squares[i].innerHTML)
+                    symbols.push(squares[i].innerHTML)
                 }
             }
-            console.log(squaresArray)
+            var winningCombos = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]]
+
+            console.log(symbols)
+
+            return winningCombos.find(function (combo) {
+                if (symbols[combo[0]] == symbols[combo[1]] && symbols[combo[1]] == symbols[combo[2]]) {
+                    return symbols[combo[0]]
+                } else {
+                    return false
+                }
+            })
         }
     </script>
 </body>
